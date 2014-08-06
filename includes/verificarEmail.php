@@ -1,37 +1,36 @@
 <?php
-//recebendo o e-mail do usuario
-$email = $_GET['login_'];
-$server = 'localhost';
-$user = 'root';
-$password='12345678';
-$database= 'loginoficial3cdb';
-
-$connection = mysql_connect($server, $user, $password);
+// recebendo o email do formulário
+$email = $_GET['login'];
+// configuração com o banco de dados
+$server   = 'localhost';
+$user     = 'root';
+$password = '12345678';
+$database = 'loginoficial3cdb';
+// Conexão com o Mysql
+$connection = mysql_connect($server,$user,$password);
 mysql_select_db($database,$connection);
- 
-$query="SELECT * FROM usuario WHERE EMAIL_USUARIO = '$email'";
+
+
+// Montando a query de consulta e executando a query
+$query = "SELECT EMAIL_USUARIO FROM usuario WHERE EMAIL_USUARIO = '$email'";
 $result = mysql_query($query);
-
-$emailCadastrados = array();
-
-while ($usuarios = mysql_fetch_assoc($result)){
-    $emailCadastrados[]= $usuarios['EMAIL_USUARIO'];
-    
-}
-
-if(in_array($email, $emailCadastrados) )
+// criando uma matriz para guardar todos emails já cadastrados no banco
+$emailsCadastrados = array();
+// Buscando os email cadastrados e montando a matriz emailsCadastrados
+while($usuarios = mysql_fetch_assoc($result))
 {
-    echo false;
-    
+    $emailsCadastrados[] = $usuarios['EMAIL_USUARIO'];
 }
-else{
-    echo true;
+// A função in_array(), é responsável em "buscar" um referido elemento dentro de uma matriz.
+// A função recebe dois parâmetros:  "o elemento a ser pesquisado" e a "matriz de elementos"
+// Veja:
+if(in_array($email, $emailsCadastrados))
+{
+    echo 'false';
+}else{
+    echo 'true';
 }
 exit();
-
-
-
-
 
  
 

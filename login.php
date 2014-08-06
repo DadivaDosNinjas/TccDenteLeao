@@ -1,10 +1,12 @@
 <?php
+
+include_once 'conexao/conecta.inc';
+include_once 'classes/Bcrypt.class.php';
 session_start();
 $email =  isset($_POST['email'])? $_POST['email']:null;
 $senha = isset($_POST['senha'])? $_POST['senha']:null;
 
-include_once 'conexao/conecta.inc';
-include_once 'classes/Bcrypt.class.php';
+
 //$email = 'roger@gmail.com';
 //$senha = 'ola mundo';
 $query = "SELECT * FROM usuario WHERE EMAIL_USUARIO='$email'";

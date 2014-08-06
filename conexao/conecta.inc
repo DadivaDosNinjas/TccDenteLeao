@@ -5,7 +5,7 @@
 $server = 'localhost';
 $user = 'root';
 $password = '12345678';
-$database = 'tccdb';
+$database = 'loginoficial3cdb';
 
 
 
@@ -15,6 +15,7 @@ $user      = 'a3051993_gist';
 $password  = 'Gist12358';
 $database  = 'a3051993_gist';
 */
+
 $connection = mysql_connect($server,$user,$password);
     if($connection === FALSE)
     {

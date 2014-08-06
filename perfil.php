@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset=UTF-8>
         <title>Perfil</title>
         <meta charset="UTF-8">
         <meta lang="pt-br">
@@ -13,18 +12,18 @@
         <?php
         
               include 'conexao/conecta.inc';
-              
-              
-              
-              
-              //$sql = "SELECT * FROM usuario WHERE COD_USUARIO ='$codigo_usuario'"; -> sessao do usuario
+            
+              //-> sessao do usuario
               session_start();
 
 echo "Perfil";
-$_SESSION["nome"] = "FIEB";
-$_SESSION["EMAIL_USUARIO"] = "SÃO PAULO";
+$_SESSION["NOME_USUARIO"] = "";
+$_SESSION["EMAIL_USUARIO"] = "";
 $_SESSION["data"] = date('d/m/y', time());
-echo '<br><a href="pagina2.php"> Página dois</a>';
+
+//echo '<br><a href="pagina2.php"></a>';
+
+             $sql = "SELECT * FROM usuario WHERE COD_USUARIO ='$codigo_usuario'";
               $result = mysql_query($sql);
               $usuario = mysql_fetch_array($result);
         ?>
