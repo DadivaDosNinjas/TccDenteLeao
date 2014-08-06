@@ -11,15 +11,19 @@
          
         <?php
         
-              include 'conexao/conecta.inc';
+              include '../conexao/conecta.inc';
+             
+              include_once '../includes/funcoesUteis.inc';
+              validaAutenticacao('frmLogin.php','2');
             
               //-> sessao do usuario
-              session_start();
+           
 
 echo "Perfil";
 $_SESSION["NOME_USUARIO"] = "";
 $_SESSION["EMAIL_USUARIO"] = "";
 $_SESSION["data"] = date('d/m/y', time());
+$codigo_usuario = $_SESSION['codigo'];
 
 //echo '<br><a href="pagina2.php"></a>';
 
@@ -42,7 +46,8 @@ $_SESSION["data"] = date('d/m/y', time());
         
             
         
-       <a href="../loginOficial/RES/indexrestrito.php">Voltar</a> <input type="submit" value="Atualizar"/>
-        </form>
+       <input type="submit" value="Atualizar"/>
+        </form><br/>
+         <a href="indexrestrito.php">Voltar</a>
     </body>
 </html>
