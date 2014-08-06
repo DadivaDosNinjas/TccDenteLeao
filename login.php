@@ -7,8 +7,6 @@ include_once 'conexao/conecta.inc';
 include_once 'classes/Bcrypt.class.php';
 //$email = 'roger@gmail.com';
 //$senha = 'ola mundo';
-$email = $_POST['email'];
-$senha = $_POST['senha'];
 $query = "SELECT * FROM usuario WHERE EMAIL_USUARIO='$email'";
 $result = mysql_query($query);
 $hashsBanco = mysql_fetch_assoc($result);
