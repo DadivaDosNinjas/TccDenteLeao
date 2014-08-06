@@ -1,44 +1,33 @@
 <?php
-echo'<meta charset=UTF-8>';
 session_start();
-$email = isset($_POST['email'])?$_POST['email']:null;
-$senha = isset($_POST['senha'])?$_POST['senha']:null;
- 
-//echo $email . '        '. $senha;
+$email =  isset($_POST['email'])? $_POST['email']:null;
+$senha = isset($_POST['senha'])? $_POST['senha']:null;
+
 include_once 'conexao/conecta.inc';
-$query = "SELECT * FROM usuario WHERE EMAIL_USUARIO = '$email'";
+include_once 'classes/Bcrypt.class.php';
+//$email = 'roger@gmail.com';
+//$senha = 'ola mundo';
+$email = $_POST['email'];
+$senha = $_POST['senha'];
+$query = "SELECT * FROM usuario WHERE EMAIL_USUARIO='$email'";
 $result = mysql_query($query);
-$totalUsuario = mysql_num_rows($result);
-if($totalUsuario === 0){
-    echo 'Usuário não encontrado !';
-    echo '<a href=frmLogin.php>Voltar</a>';
+$hashsBanco = mysql_fetch_assoc($result);
+$senhahash = $hashsBanco['SENHA_USUARIO'];
+// Encriptando a senha
+//$hash = Bcrypt::hash($senha);
+// $hash = $2a$08$MTgxNjQxOTEzMTUwMzY2OOc15r9yENLiaQqel/8A82XLdj.OwIHQm
+// Salve $hash no banco de dados
+// Verificando a senha
+//$senha = 'ola mundo';
+//$hash = '$2a$08$MTgxNjQxOTEzMTUwMzY2OOc15r9yENLiaQqel/8A82XLdj.OwIHQm'; //Valor retirado do banco
+if (!Bcrypt::check($senha, $senhahash)) {
+echo 'Senha incorreta!<br/> <a href="frmLogin.php">Voltar</a>';
+} else {
+  echo '<a href=indexrestrito.php>Senha OK!<a/>';
+
 }
- else {
-      //Agora preciso testar a senha do usuário
-     $usuario = mysql_fetch_array($result);
-     $senhaUsuario = $usuario['SENHA_USUARIO'];
-     $tipoUsuario = $usuario['TIPO_USUARIO_ID_TIPO'];       
-     $emailUsuario = $usuario['EMAIL_USUARIO'];
-     if($senha !== $senhaUsuario){
-         echo 'Senha não confere !';
-         echo '<a href=frmLogin.php>Voltar</a>';
-         }
-    else {
-          //Agora o email e senha estão corretos !
-          //podemos criar as sessões e direcionar os usuarios
-        $_SESSION['email'] = $email;
-        $_SESSION['senha'] = $senha;
-        if($tipoUsuario === '1'){
-            echo '<script language="JavaScript"> location.href="RES/indexrestrito.php"
-            </script>';
-     }
-     elseif ($tipoUsuario === '2'){
-         echo '<script language= "JavaScript"> location.href="ADM/indexadmin.php"</script>';
-     }
-     else{
-                  echo 'Tipo de usuário inválido !';}
- }
-  
-}
+//echo Bcrypt::hash($senha);
 
 
+
+?>
