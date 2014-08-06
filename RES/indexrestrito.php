@@ -4,6 +4,7 @@ include_once '../includes/funcoesUteis.inc';
 validaAutenticacao('frmLogin.php','2');
 echo '<h3>Sistema de login - Home Page (Restrito) </h3>';
 
+echo '<p>Olá Srº(ª) <font color=red>' .  $_SESSION['nome'] . '</font></p>';
 echo '<a href=perfil.php?codigo=$cod_usuario>Alterar Dados</a> <br/> <br/> <br/>';
 
 

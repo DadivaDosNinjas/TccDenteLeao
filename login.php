@@ -25,6 +25,7 @@ echo 'Senha incorreta!<br/> <a href="frmLogin.php">Voltar</a>';
     $_SESSION['email'] = $email;
     $_SESSION['senha'] = $senha;
     $_SESSION['codigo'] = $usuarios['COD_USUARIO'];
+    $_SESSION['nome'] = $usuarios['NOME_USUARIO'];
     
     if($usuarios['TIPO_USUARIO'] == '2'){
          //echo '<a href=indexrestrito.php>Senha OK!<a/>'; 
